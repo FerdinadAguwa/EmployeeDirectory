@@ -1,30 +1,41 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table'
+import Row from "../Row"
 
-function Record() {
+
+function Record(props) {
+  console.log(props)
+
+   const headingsArray = [" ","First Name","Last Name", "Email", "Phone Number", "DOB"]
   return (
-    <div className= "App">
-    <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Phone Number</th>
-      <th>Date of Birth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</Table>
-</div>
+    <div className="App">
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+          {headingsArray.map((heading,index) => {
+            return(
+              <th onClick = {() => props.sortFunction(heading)}>{heading}</th>
+            )
+          })}
+          </tr>
+        </thead>
+        <tbody>
+          {console.log(props.results)}
+          {props.results && props.results.map(element => (
+            <Row
+              img={element.picture.thumbnail}
+              firstName={element.name.first}
+              lastName={element.name.last}
+              email={element.email}
+              phoneNum={element.phone}
+              dob= {element.dob.date}
+
+            />
+          ))}
+
+        </tbody>
+      </Table>
+    </div>
   );
 }
 

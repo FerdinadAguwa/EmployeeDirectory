@@ -8,13 +8,25 @@ import Title from "../Title";
 
 class Results extends Component {
     state = {
-        result: {},
-        search: ""
+        result: null,
+        search: "",
+        orderSortedBy: "descend"
     };
+
+
  
     componentDidMount(){
         this.getEmployee()
     }
+
+    sortFunction = (heading)=>{
+        const sortedNames = this.state.result.sort();
+        this.setState({ result: sortedNames})
+        console.log(heading)
+    
+    }
+
+
 
     getEmployee = () => {
         API.search()
@@ -35,7 +47,10 @@ class Results extends Component {
 
                 <SearchBar />
 
-                <Record />
+                <Record
+                results = {this.state.result}
+                sortFunction = {this.sortFunction}
+                />
             </div>
 
         );
