@@ -10,6 +10,7 @@ class Results extends Component {
     state = {
         result: null,
         search: "",
+        allResults:[],
         orderSortedBy: "descend"
     };
 
@@ -33,6 +34,28 @@ class Results extends Component {
             .then(res => this.setState({ result: res.data.results }))
             .catch(err => console.log(err));
     };
+
+    handleInputChange = event => {
+        let searchResult = event.target.value.toLowerCase();
+        //console.log(searchResult);
+        let newEmployees = this.state.allResults.filter(person => `${person.name.first.toLowerCase()}`.includes(searchResult))
+        if (!searchResult) {
+          this.setState({
+            search: searchResult,
+            results: this.state.allResults
+          })
+        } else {
+          this.setState({
+            search: searchResult,
+            results: newEmployees
+          })
+        }
+      };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.searchGiphy(this.state.search)
+    }
     
 
 
@@ -45,7 +68,11 @@ class Results extends Component {
                     <Title>Employee Directory</Title>
                 </Wrapper>
 
-                <SearchBar />
+                <SearchBar 
+                search ={this.state.search}
+                handleInputChange ={this.handleInputChange}
+                handleFormSubmit ={this.handleFormSubmit}
+                />
 
                 <Record
                 results = {this.state.result}
