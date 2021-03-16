@@ -11,7 +11,7 @@ class Results extends Component {
         result: null,
         search: "",
         allResults:[],
-        orderSortedBy: "descend"
+        // orderSortedBy: "descend"
     };
 
 
@@ -36,25 +36,19 @@ class Results extends Component {
     };
 
     handleInputChange = event => {
-        let searchResult = event.target.value.toLowerCase();
-        //console.log(searchResult);
-        let newEmployees = this.state.allResults.filter(person => `${person.name.first.toLowerCase()}`.includes(searchResult))
-        if (!searchResult) {
-          this.setState({
-            search: searchResult,
-            results: this.state.allResults
-          })
-        } else {
-          this.setState({
-            search: searchResult,
-            results: newEmployees
-          })
-        }
+        event.preventDefault();
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+          [name]: value
+        });
       };
 
     handleFormSubmit = event => {
         event.preventDefault();
-        this.searchGiphy(this.state.search)
+        this.getEmployee(this.state.search)
+        console.log(this.state.search)
+    
     }
     
 
@@ -69,7 +63,7 @@ class Results extends Component {
                 </Wrapper>
 
                 <SearchBar 
-                search ={this.state.search}
+               search ={this.state.search}
                 handleInputChange ={this.handleInputChange}
                 handleFormSubmit ={this.handleFormSubmit}
                 />

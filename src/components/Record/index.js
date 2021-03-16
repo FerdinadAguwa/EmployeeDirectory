@@ -12,17 +12,18 @@ function Record(props) {
       <Table striped bordered hover>
         <thead>
           <tr>
-          {headingsArray.map((heading,index) => {
+          {/* {headingsArray.map((heading,index) => {
             return(
               <th onClick = {() => props.sortFunction(heading)}>{heading}</th>
             )
-          })}
+          })} */}
           </tr>
         </thead>
         <tbody>
           {console.log(props.results)}
           {props.results && props.results.map(element => (
             <Row
+              key ={element.email}
               img={element.picture.thumbnail}
               firstName={element.name.first}
               lastName={element.name.last}

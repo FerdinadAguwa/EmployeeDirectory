@@ -3,7 +3,7 @@ import moment from "moment";
 
 function Row(props) {
     return (
-        <tr>
+        <tr className= "listgroup">
         <td><img src = {props.img}></img></td>
         <td>{props.firstName}</td>
         <td>{props.lastName}</td>
